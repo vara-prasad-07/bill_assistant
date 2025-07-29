@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 import httpx
 import asyncio
 import json
@@ -25,12 +25,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Pydantic models
 class ChatRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    
     message: str
     uid: str
 
 class ChatResponse(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    
     success: bool
     response: str
     timestamp: str
