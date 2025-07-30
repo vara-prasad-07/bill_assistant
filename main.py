@@ -88,11 +88,17 @@ def get_cached_user_data(uid: str, cache_key: str):
     return None  # This will be implemented with actual caching logic
 
 # Ultra-concise prompt to minimize token usage
-PROMPT_TEMPLATE = """Financial data: {user_data}
+PROMPT_TEMPLATE = """
+You are a smart financial assistant.
 
-Q: {message}
+User's financial summary:
+{user_data}
 
-Analyze spending and respond concisely."""
+Question:
+{message}
+
+Based on the financial summary, answer the question clearly with useful insights. Keep it concise but informative. and user currency is INR
+"""
 
 async def fetch_user_data_async(uid: str) -> Dict[str, Any]:
     """Async function to fetch user data from Firestore"""
